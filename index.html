@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File to Link Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+      margin: 0;
+    }
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 300px;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    input[type="file"] {
+      margin: 20px 0;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #downloadLink {
+      margin-top: 20px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Convert File to Link</h1>
+    <input type="file" id="fileInput">
+    <button onclick="generateLink()">Generate Link</button>
+    <p id="downloadLink"></p>
+  </div>
+
+  <script>
+    function generateLink() {
+      const fileInput = document.getElementById('fileInput');
+      const file = fileInput.files[0];
+
+      if (file) {
+        // Create an object URL for the file
+        const fileURL = URL.createObjectURL(file);
+
+        // Show the download link
+        const downloadLink = document.getElementById('downloadLink');
+        downloadLink.innerHTML = `Your file is ready. <a href="${fileURL}" download="${file.name}">Click here to download the file</a>`;
+        downloadLink.style.display = 'block';
+      } else {
+        alert("Please select a file first.");
+      }
+    }
+  </script>
+</body>
+</html>
